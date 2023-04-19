@@ -1,0 +1,13 @@
+div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+div label {
+  width: 30%;
+}
+div input {
+  width: 65%;
+}
