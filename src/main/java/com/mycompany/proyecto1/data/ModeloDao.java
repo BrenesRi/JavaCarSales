@@ -66,6 +66,29 @@ public class ModeloDao {
         }
         return resultado;
     }
+    
+    public Modelo readByNombre(String nombre) {
+       Modelo resultado = new Modelo();
+        try {
+            String sql = "select * "
+                    + "from "
+                    + "Modelo e "
+                    + "where e.descripcion=?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1,nombre);
+            ResultSet rs = db.executeQuery(stm);
+            if (rs.next()) {
+            resultado.setId(Integer.valueOf(rs.getString("id")));
+            resultado.setDescripcion(rs.getString("descripcion"));
+            return resultado;
+        } else {
+            return null;
+        }
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
     public void create(Modelo e) throws Exception {
         String sql = "insert into "
                 + "Modelo "

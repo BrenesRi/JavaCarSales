@@ -33,7 +33,7 @@
         
         
 <div class="panel" style="width:30%;">
-        <form method="post" action="presentation/admin/modelo/create">
+        <form method="post" action="presentation/admin/modelo/create" enctype="multipart/form-data">
   <label for="marca">Marca:</label>
   <select id="marca" name="marcaFld">
         <% for(Marca m: marcas){%>
@@ -51,9 +51,8 @@
   <br>
   
   <label for="imagen">Imagen:</label>
-<input type="file" id="imagen" name="imagenFld">
-<br>
-  <br>
+  <input type="file" id="imagen" name="imagen">
+  <br><br>
  
   <button  style="margin-bottom: 15px">Enviar</button>
 </form>

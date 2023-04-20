@@ -11,11 +11,17 @@ import com.mycompany.proyecto1.logic.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +30,7 @@ import java.util.Map;
  *
  * @author Kevin
  */
+@MultipartConfig
 @WebServlet(name = "ModeloController", urlPatterns = {"/presentation/admin/modelo/show","/presentation/admin/modelo/create"})
 public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, 
@@ -41,10 +48,34 @@ public class Controller extends HttpServlet {
                 viewUrl=this.create(request);
                 break;
      
+                
         }
         request.getRequestDispatcher(viewUrl).forward( request, response); 
   }
+    
+    public static final String LOCATION="images/modelos/";
 
+    private void postImage(HttpServletRequest request, Integer id){
+        try{
+            final Part imagen = request.getPart("imagen");
+            InputStream is = imagen.getInputStream();
+            FileOutputStream os = new FileOutputStream(LOCATION + id);
+            is.transferTo(os);
+            os.close();
+        }
+        catch(Exception ex){}
+    }
+    private void getImage(HttpServletRequest request,HttpServletResponse response){
+    String id=request.getParameter("id");
+    try{
+        ServletOutputStream os=response.getOutputStream();
+        FileInputStream is=new FileInputStream(LOCATION+id);
+        is.transferTo(os);
+        os.close();
+    }catch(IOException ex){
+
+    }
+}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -140,6 +171,10 @@ public class Controller extends HttpServlet {
         
         model.getCurrent().getMarca().setId(Integer.valueOf(request.getParameter("marcaFld")));
         model.getCurrent().setDescripcion(request.getParameter("descripcionFld"));
+        
+        // Guardar imagen en el servidor
+        //Integer id = model.getCurrent().getId();
+        //postImage(request, id);
     }
 
     private String updateAction(HttpServletRequest request) {
@@ -149,6 +184,9 @@ public class Controller extends HttpServlet {
         try {
             model.setMarcas(service.marcasFind());
             service.modeloCreate(modelo);
+            Modelo generatedkey = service.modeloFindByNombre(modelo.getDescripcion());
+            postImage(request, generatedkey.getId());
+            
             return "/presentation/admin/modelos/show";
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();

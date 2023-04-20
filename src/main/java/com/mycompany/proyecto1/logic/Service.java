@@ -92,7 +92,11 @@ public class Service {
     
      public Poliza polizaFind(String numero) throws Exception{
         return polizaDao.read(numero);
-    } 
+    }
+     
+     public Modelo modeloFindByNombre(String nombre) throws Exception{
+        return modeloDao.readByNombre(nombre);
+     }
     
      public void clienteCreate(Cliente cliente) throws Exception{
        clienteDao.create(cliente);
