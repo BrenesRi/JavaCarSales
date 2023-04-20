@@ -43,9 +43,25 @@ create table Modelo (
   Primary Key(id)
 );
 
+create table Categoria (
+  id integer auto_increment not null,
+  descripcion varchar(30) not null,
+  Primary key(id)
+  );
+
+create table Cobertura (
+  id integer auto_increment not null,
+  descripcion varchar(30) not null,
+  categoria integer not null,
+  costominimo integer not null,
+  porcentaje integer not null,
+  Primary Key(id)
+);
+
 alter table Cliente add foreign key (usuario) references Usuario(cedula);
 alter table Poliza add foreign key (cliente) references Cliente(cedula);
 alter table Modelo add foreign key (marca) references Marca(id);
+alter table Cobertura add foreign key (categoria) references Categoria(id);
 
 insert into Usuario (cedula,clave,tipo) 
 	values ("111","111",1);
@@ -86,4 +102,15 @@ Insert Into Modelo (descripcion, marca)
 Insert Into Modelo (descripcion, marca) 
         values ("Skyline", 2);
 
+Insert Into Categoria (descripcion)
+        values ("Responsabilidad Civil");
+
+Insert Into Categoria (descripcion)
+        values ("Perjuicio Directo");
+
+INSERT INTO Cobertura (descripcion, categoria, costominimo, porcentaje)
+VALUES ('Perjuicio a personas', 1, 50000, 20);
+
+INSERT INTO Cobertura (descripcion, categoria, costominimo, porcentaje)
+VALUES ('Perjuicio al Auto', 2, 30000, 10);
 
