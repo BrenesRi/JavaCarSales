@@ -75,7 +75,6 @@ public class MarcaDao {
             Marca resultado = new Marca();
             resultado.setId(Integer.valueOf(rs.getString("id")));
             resultado.setNombre(rs.getString("nombre"));
-            resultado.setModelos((List<Modelo>) rs.getArray("modelos"));
             return resultado;
         } else {
             return null;
