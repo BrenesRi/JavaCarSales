@@ -25,7 +25,7 @@ footer {
     bottom: 0;
     width: 100%;
     background-color: #34495E;
-    color: #D9CD57;
+    color: #4c55cf;
     text-align: center;
     font-family: mifuente,verdana;
 }
@@ -43,7 +43,7 @@ footer img{
 .logo>span{
     font-family:  mifuenteH,verdana;
     font-size: 2em;
-    color: #D9CD57;
+    color: #3c39c7;
 }
 
  table {
@@ -68,7 +68,7 @@ footer img{
     background-color: #fff;
   }
   tr:nth-child(odd) {
-    background-color: #B6F681 ;
+    background-color: #8381f6 ;
   }
   tr:hover{
     background-color:  #cecece;
@@ -84,7 +84,7 @@ footer img{
     margin-top: 5px;
     border: 3px solid gray;
     padding: 10px;
-    background: linear-gradient(to right, #ff7f50, #ffd801);;
+    background: linear-gradient(to right, #7b50f1, #5369e2);;
     box-shadow: -10px 10px;
     min-width: 294px;
 }

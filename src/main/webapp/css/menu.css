@@ -1,7 +1,7 @@
 .menu{
     padding: 2px;
     padding-bottom: 0px;
-    color:#D9CD57;
+    color:#dbd24a;
 }
 .menu-ul{
     display: flex;
@@ -32,13 +32,13 @@
 
 .menu>ul>li>a{
     width: 11em;
-    color: #D9CD57;
+    color:#617fd1;
     text-transform: uppercase;
     text-decoration: none;
     display: block;
 }
 
 .menu>ul>li>a:hover{
-    color:#D9CD57;
+    color:#cee649;
 }
 
