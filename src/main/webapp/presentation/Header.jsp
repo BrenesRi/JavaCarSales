@@ -46,7 +46,10 @@
                 <a href="presentation/admin/modelos/show">Gestionar Modelos</a>
                 <ul>  <!--submenu --> </ul>
             </li>
-                     
+             <li>
+                <a href="presentation/admin/categorias/show">Gestionar Categorias</a>
+                <ul>  <!--submenu --> </ul>
+            </li>        
             <li >
                 <a  href="presentation/cliente/datos/show">Administrador: <%=usuario.getCedula()%></a>
                 <ul>  <!--submenu --> </ul>

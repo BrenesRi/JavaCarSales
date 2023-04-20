@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto1.logic;
 
+import com.mycompany.proyecto1.data.CategoriaDao;
 import com.mycompany.proyecto1.data.ClienteDao;
 import com.mycompany.proyecto1.data.MarcaDao;
 import com.mycompany.proyecto1.data.ModeloDao;
@@ -17,97 +18,97 @@ import java.util.List;
  * @author ribre
  */
 public class Service {
-    private static Service uniqueInstance;
-    
-    public static Service instance(){
-        if (uniqueInstance == null){
-            uniqueInstance = new Service();
-        }
-        return uniqueInstance; 
-    }
+
     RelDatabase relDatabase;
     UsuarioDao usuarioDao;
     ClienteDao clienteDao;
     PolizaDao polizaDao;
     MarcaDao marcaDao;
     ModeloDao modeloDao;
-    
-    
-    //    HashMap<String,Usuario> usuarios;
-//    HashMap<String,Cliente> clientes;
-//    HashMap<String,Poliza> polizas;
-//    HashMap<String,List<String>> favoritas;
+    CategoriaDao categoriaDao;
 
-    private Service(){
+    private static Service uniqueInstance;
+
+    public static Service instance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new Service();
+        }
+        return uniqueInstance;
+    }
+
+    private Service() {
         relDatabase = new RelDatabase();
         usuarioDao = new UsuarioDao(relDatabase);
         clienteDao = new ClienteDao(relDatabase);
         polizaDao = new PolizaDao(relDatabase);
         marcaDao = new MarcaDao(relDatabase);
         modeloDao = new ModeloDao(relDatabase);
-        
-}
-    public Usuario usuarioFind(String cedula, String clave) throws Exception {
-    Usuario usuario = usuarioDao.read(cedula);
-    if (usuario.getClave().equals(clave)) {
-        return usuario;
-    } else {
-        return null;
+        categoriaDao = new CategoriaDao(relDatabase);
     }
-}
 
-    
-    public Cliente clienteFind(Usuario usuario) throws Exception{
+    public Usuario usuarioFind(String cedula, String clave) throws Exception {
+        Usuario usuario = usuarioDao.read(cedula);
+        if (usuario.getClave().equals(clave)) {
+            return usuario;
+        } else {
+            return null;
+        }
+    }
+
+    public Cliente clienteFind(Usuario usuario) throws Exception {
         return clienteDao.read(usuario.getCedula());
     }
-    public Marca marcaFind(String nombre) throws Exception{
+
+    public Marca marcaFind(String nombre) throws Exception {
         return marcaDao.read(nombre);
     }
-    
+
     public List<Marca> marcasFind() {
         List<Marca> marcas = marcaDao.findMarcas();
         return marcas;
     }
-    
+
     public List<Modelo> modelosFind() {
         List<Modelo> modelos = modeloDao.findModelos();
         return modelos;
     }
-    
+
     public List<Cliente> clienteFind() {
-       List<Cliente> clientes = clienteDao.findClientes();
+        List<Cliente> clientes = clienteDao.findClientes();
         return clientes;
     }
-    
-    public List<Poliza> cuentasFind(Cliente cliente) throws Exception{
+
+    public List<Poliza> cuentasFind(Cliente cliente) throws Exception {
         List<Poliza> polizas = polizaDao.findByCliente(cliente);
-        for(Poliza e:polizas) e.setCliente(cliente);
+        for (Poliza e : polizas) {
+            e.setCliente(cliente);
+        }
         cliente.setPolizas(polizas);
         return polizas;
     }
-    
-    public void clienteUpdate(Cliente cliente) throws Exception{
+
+    public void clienteUpdate(Cliente cliente) throws Exception {
         clienteDao.update(cliente);
     }
-    
-     public Poliza polizaFind(String numero) throws Exception{
+
+    public Poliza polizaFind(String numero) throws Exception {
         return polizaDao.read(numero);
     }
-     
-     public Modelo modeloFindByNombre(String nombre) throws Exception{
+
+    public Modelo modeloFindByNombre(String nombre) throws Exception {
         return modeloDao.readByNombre(nombre);
-     }
-    
-     public void clienteCreate(Cliente cliente) throws Exception{
-       clienteDao.create(cliente);
-     }
-     
-     public void usuarioCreate(Usuario usuario) throws Exception{
-       usuarioDao.create(usuario);
-     }
-     
+    }
+
+    public void clienteCreate(Cliente cliente) throws Exception {
+        clienteDao.create(cliente);
+    }
+
+    public void usuarioCreate(Usuario usuario) throws Exception {
+        usuarioDao.create(usuario);
+    }
+
     public void usuarioUpdate(Usuario usuario) throws Exception {
-       usuarioDao.update(usuario);
+        usuarioDao.update(usuario);
     }
 
     public List<Modelo> modelosFindByMarca(Integer numero) throws Exception {
@@ -115,11 +116,20 @@ public class Service {
     }
 
     public void marcaCreate(Marca marca) throws Exception {
-         marcaDao.create(marca);
+        marcaDao.create(marca);
     }
 
     public void modeloCreate(Modelo modelo) throws Exception {
         modeloDao.create(modelo);
     }
-    
+
+    public List<Categoria> categoriasFind() {
+        List<Categoria> categorias = categoriaDao.findCategorias();
+        return categorias;
+    }
+
+    public void categoriaCreate(Categoria categoria) throws Exception {
+        categoriaDao.create(categoria);
+    }
+
 }
