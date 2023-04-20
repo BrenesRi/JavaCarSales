@@ -3,10 +3,20 @@
     Created on : Apr 19, 2023, 4:37:53 PM
     Author     : Kevin
 --%>
+<%@page import="com.mycompany.proyecto1.logic.Marca"%>
 <%@page import="com.mycompany.proyecto1.presentation.admin.modelo.Model"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    Model model = (Model) request.getAttribute("model");
+    List<Marca> marcas = model.getMarcas();
+%>
+
 <!DOCTYPE html>
 <html>
     <head> 
@@ -16,55 +26,29 @@
         <%@ include file="/presentation/Head.jsp" %>
    </head> 
     <body >
-        <%@ include file="/presentation/Header.jsp" %>
-        
-        <% Model model= (Model) request.getAttribute("model"); %>
-        <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
-        <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
-        
+        <%@ include file="/presentation/Header.jsp" %>      
         
 <div class="panel" style="width:30%;">
-        <form method="POST" action="presentation/admin/modelo/create">
-  <div class="fila">
-    <label for="marca">Marca:</label>
-    <input class="<%=erroneo("marcaFld",errores)%>" type="text" id="marca" 
-           name="nombreFld" value="<%=form.get("marcaFld")[0]%>" title="<%=title("marcaFld",errores)%>">
-    <br>
-    <label for="Modelo">Modelo:</label>
-    <input class="<%=erroneo("descripcionFld",errores)%>" type="text" id="descripcion" 
-           name="descripcionFld" value="<%=form.get("descripcionFld")[0]%>" title="<%=title("descripcionFld",errores)%>">
-  </div>
+        <form method="post" action="presentation/admin/modelo/create">
+  <label for="marca">Marca:</label>
+  <select id="marca" name="marcaFld">
+        <% for(Marca m: marcas){%>
+    <option value="<%= m.getId() %>"><%= m.getNombre() %></option>
+            <% } %>
+  </select>
+      
   <br>
-  <div class="fila">
-    <button type="submit" style="margin-bottom: 15px">Enviar</button>
-  </div>
+  
+  <label for="descripcion">Modelo:</label>
+  <input type="text" id="descripcion" name="descripcionFld">
+
+  <br>
+  
+  <button  style="margin-bottom: 15px">Enviar</button>
 </form>
-  </div>
-  <br>
   
         <%@ include file="/presentation/Footer.jsp" %>                  
     </body>
 </html>
 
-<%!
-    private String erroneo(String campo, Map<String,String> errores){
-      if ( (errores!=null) && (errores.get(campo)!=null) )
-        return "is-invalid";
-      else
-        return "";
-    }
 
-    private String title(String campo, Map<String,String> errores){
-      if ( (errores!=null) && (errores.get(campo)!=null) )
-        return errores.get(campo);
-      else
-        return "";
-    }
-
-    private Map<String,String[]> getForm(Model model){
-       Map<String,String[]> values = new HashMap<>();
-       values.put("marcaFld", new String[]{model.getCurrent().getMarca().getNombre()});
-       values.put("descripcionFld", new String[]{model.getCurrent().getDescripcion()});
-       return values;
-    }
-%> 

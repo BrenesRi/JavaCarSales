@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto1.presentation.admin.modelo;
 
+import com.mycompany.proyecto1.logic.Marca;
 import com.mycompany.proyecto1.logic.Modelo;
 import com.mycompany.proyecto1.logic.Service;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -85,7 +87,14 @@ public class Controller extends HttpServlet {
     }
 
     private String showAction(HttpServletRequest request) {
-        return "/presentation/admin/modelo/View.jsp";
+        Model model= (Model) request.getAttribute("model");
+        Service  service = Service.instance();
+        try {
+            model.setMarcas(service.marcasFind());
+            return "/presentation/admin/modelo/View.jsp";
+        } catch (Exception ex) {
+            return "/presentation/Error.jsp";
+        }
     }
 
     private String create(HttpServletRequest request) {
@@ -127,6 +136,7 @@ public class Controller extends HttpServlet {
         Service  service = Service.instance();
         Modelo modelo = model.getCurrent();
         try {
+            model.setMarcas(service.marcasFind());
             service.modeloCreate(modelo);
             return "/presentation/admin/modelos/show";
         } catch (Exception ex) {
@@ -136,7 +146,5 @@ public class Controller extends HttpServlet {
             return "/presentation/admin/modelos/View.jsp"; 
         }
     }
-    
-    
 
 }
