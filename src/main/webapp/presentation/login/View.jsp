@@ -18,8 +18,8 @@
         <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
 
         <form class="form" name="form" action="presentation/login/login" method="post" > 
-            <div class="panel" style="width:30%;">
-                <div class="fila">
+            <div class="panel" style="width:30%; margin: 0 auto;">
+                <div class="fila" style="width: 30%; text-align: center;">
                     <h2>Login</h2>
                     <img src="/Proyecto1/images/auto.jpg" width="70px" style="border-radius: 50% 10% 50% 10%;border:1px solid #000;">
                 </div>

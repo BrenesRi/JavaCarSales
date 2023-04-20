@@ -6,6 +6,7 @@ package com.mycompany.proyecto1.logic;
 
 import com.mycompany.proyecto1.data.CategoriaDao;
 import com.mycompany.proyecto1.data.ClienteDao;
+import com.mycompany.proyecto1.data.CoberturaDao;
 import com.mycompany.proyecto1.data.MarcaDao;
 import com.mycompany.proyecto1.data.ModeloDao;
 import com.mycompany.proyecto1.data.PolizaDao;
@@ -26,6 +27,7 @@ public class Service {
     MarcaDao marcaDao;
     ModeloDao modeloDao;
     CategoriaDao categoriaDao;
+    CoberturaDao coberturaDao;
 
     private static Service uniqueInstance;
 
@@ -44,6 +46,7 @@ public class Service {
         marcaDao = new MarcaDao(relDatabase);
         modeloDao = new ModeloDao(relDatabase);
         categoriaDao = new CategoriaDao(relDatabase);
+        coberturaDao = new CoberturaDao(relDatabase);
     }
 
     public Usuario usuarioFind(String cedula, String clave) throws Exception {
@@ -114,6 +117,10 @@ public class Service {
     public List<Modelo> modelosFindByMarca(Integer numero) throws Exception {
         return modeloDao.readByMarca(numero);
     }
+    
+    public List<Cobertura> coberturasFindByCategoria(Integer numero) throws Exception {
+        return coberturaDao.readByCategoria(numero);
+    }
 
     public void marcaCreate(Marca marca) throws Exception {
         marcaDao.create(marca);
@@ -130,6 +137,10 @@ public class Service {
 
     public void categoriaCreate(Categoria categoria) throws Exception {
         categoriaDao.create(categoria);
+    }
+
+    public void coberturaCreate(Cobertura cobertura) throws Exception {
+        coberturaDao.create(cobertura);
     }
 
 }

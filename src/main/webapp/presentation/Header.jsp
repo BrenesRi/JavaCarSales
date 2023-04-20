@@ -47,9 +47,13 @@
                 <ul>  <!--submenu --> </ul>
             </li>
              <li>
-                <a href="presentation/admin/categorias/show">Gestionar Categorias</a>
+                <a href="presentation/admin/categorias/show">Categorias</a>
                 <ul>  <!--submenu --> </ul>
-            </li>        
+            </li> 
+            <li>
+                <a href="presentation/admin/coberturas/show">Coberturas</a>
+                <ul>  <!--submenu --> </ul>
+            </li> 
             <li >
                 <a  href="presentation/cliente/datos/show">Administrador: <%=usuario.getCedula()%></a>
                 <ul>  <!--submenu --> </ul>
