@@ -138,7 +138,7 @@ public class Controller extends HttpServlet {
         Model model= (Model) request.getAttribute("model");
         Service  service = Service.instance();
         
-        model.getCurrent().getMarca().setNombre(request.getParameter("marcaFld"));
+        model.getCurrent().getMarca().setId(Integer.valueOf(request.getParameter("marcaFld")));
         model.getCurrent().setDescripcion(request.getParameter("descripcionFld"));
     }
 

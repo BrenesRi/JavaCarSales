@@ -67,7 +67,7 @@ public class MarcaDao {
             String sql = "select * "
                     + "from "
                     + "Marca e "
-                    + "WHERE e.nombre = ?";
+                    + "WHERE e.id = ?";
             PreparedStatement stm = db.prepareStatement(sql);
             stm.setString(1, nombre);
             ResultSet rs = db.executeQuery(stm);
