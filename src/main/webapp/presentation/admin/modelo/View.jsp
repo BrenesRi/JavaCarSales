@@ -50,6 +50,11 @@
   <br>
   <br>
   
+  <label for="imagen">Imagen:</label>
+<input type="file" id="imagen" name="imagenFld">
+<br>
+  <br>
+ 
   <button  style="margin-bottom: 15px">Enviar</button>
 </form>
   
