@@ -26,7 +26,11 @@
         <%@ include file="/presentation/Head.jsp" %>
    </head> 
     <body >
-        <%@ include file="/presentation/Header.jsp" %>      
+        <%@ include file="/presentation/Header.jsp" %>
+        
+        <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
+        <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
+        
         
 <div class="panel" style="width:30%;">
         <form method="post" action="presentation/admin/modelo/create">
@@ -38,10 +42,12 @@
   </select>
       
   <br>
+  <br>
   
   <label for="descripcion">Modelo:</label>
   <input type="text" id="descripcion" name="descripcionFld">
 
+  <br>
   <br>
   
   <button  style="margin-bottom: 15px">Enviar</button>
@@ -51,4 +57,25 @@
     </body>
 </html>
 
+<%!
+    private String erroneo(String campo, Map<String,String> errores){
+      if ( (errores!=null) && (errores.get(campo)!=null) )
+        return "is-invalid";
+      else
+        return "";
+    }
 
+    private String title(String campo, Map<String,String> errores){
+      if ( (errores!=null) && (errores.get(campo)!=null) )
+        return errores.get(campo);
+      else
+        return "";
+    }
+
+    private Map<String,String[]> getForm(Model model){
+       Map<String,String[]> values = new HashMap<>();
+       values.put("marcaFld", new String[]{model.getCurrent().getMarca().getNombre()});
+       values.put("descripcionFld", new String[]{model.getCurrent().getDescripcion()});
+       return values;
+    }
+%> 

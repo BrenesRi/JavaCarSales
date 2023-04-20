@@ -7,6 +7,7 @@ package com.mycompany.proyecto1.presentation.admin.modelo;
 import com.mycompany.proyecto1.logic.Marca;
 import com.mycompany.proyecto1.logic.Modelo;
 import com.mycompany.proyecto1.logic.Service;
+import com.mycompany.proyecto1.logic.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,14 +88,23 @@ public class Controller extends HttpServlet {
        return this.showAction(request);
     }
 
+
     private String showAction(HttpServletRequest request) {
-        Model model= (Model) request.getAttribute("model");
-        Service  service = Service.instance();
+        Model model = (Model) request.getAttribute("model");
+        Service service = Service.instance();
+        HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<Marca> marcas;
         try {
-            model.setMarcas(service.marcasFind());
+            marcas = service.marcasFind();
+        } catch (Exception ex) {
+            marcas=null;
+        }
+        try {        
+            model.setMarcas(marcas);
             return "/presentation/admin/modelo/View.jsp";
         } catch (Exception ex) {
-            return "/presentation/Error.jsp";
+            return "";
         }
     }
 
@@ -117,8 +128,8 @@ public class Controller extends HttpServlet {
 
     private Map<String, String> validar(HttpServletRequest request) {
         Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("nombreFld").isEmpty()){
-            errores.put("nombreFld","Nombre requerido");
+        if (request.getParameter("descripcionFld").isEmpty()){
+            errores.put("descripcionFld","Modelo requerido");
         }
         return errores;
     }
