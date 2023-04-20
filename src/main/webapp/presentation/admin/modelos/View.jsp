@@ -26,14 +26,15 @@
     
         <table>
             <thead>
-                <tr> <td>Numero</td> <td>Nombre</td> <td>Marca</td> </tr>
+                <tr> <td>Numero:</td> <td>Nombre:</td> <td>Marca:</td> <td>Imagen:</td> </tr>
             </thead>
             <tbody>
                 <% for(Modelo c:modelos){%>
                 <tr> <td><a href="presentation/cliente/poliza/show?numeroFld=<%=c.getId()%>"><%=c.getId()%> </td>  
                         <td><%=c.getDescripcion()%></td>
                         <td><%=c.getMarca().getNombre()%></td>
-                
+                <td><img src="presentation/admin/modelo/getImage?id=<%=c.getId()%>" width="140" height ="80">
+</td>
                 </tr>             
                         <%}%>
             </tbody>

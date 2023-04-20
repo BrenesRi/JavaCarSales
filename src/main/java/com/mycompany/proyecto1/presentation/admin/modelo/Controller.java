@@ -31,7 +31,8 @@ import java.util.Map;
  * @author Kevin
  */
 @MultipartConfig
-@WebServlet(name = "ModeloController", urlPatterns = {"/presentation/admin/modelo/show","/presentation/admin/modelo/create"})
+@WebServlet(name = "ModeloController", urlPatterns = {"/presentation/admin/modelo/show","/presentation/admin/modelo/create",
+                                                      "/presentation/admin/modelo/getImage"})
 public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
@@ -47,13 +48,16 @@ public class Controller extends HttpServlet {
             case "/presentation/admin/modelo/create":
                 viewUrl=this.create(request);
                 break;
+            case "/presentation/admin/modelo/getImage":
+                this.getImage(request,response);
+                break;
      
                 
         }
         request.getRequestDispatcher(viewUrl).forward( request, response); 
   }
     
-    public static final String LOCATION="images/modelos/";
+    public static final String LOCATION="C:/AAA/seguros/";
 
     private void postImage(HttpServletRequest request, Integer id){
         try{
