@@ -5,8 +5,10 @@
  */
 package com.mycompany.proyecto1.logic;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -16,22 +18,25 @@ public class Poliza {
     Integer numero;
     String placa;
     double valor;
-    String auto;
     Date fecha;
     Cliente cliente;
-
+    Modelo modelo;
+    List<Cobertura> coberturas;
+         
     public Poliza() {
-        this(0,"",0,"",new Date(),new Cliente());
+        this(0,"",0,new Date(),new Cliente(), new Modelo(), new ArrayList<>());
     }
 
-    public Poliza(Integer numero, String placa, double valor, String auto, Date fecha, Cliente cliente) {
+    public Poliza(Integer numero, String placa, double valor, Date fecha, Cliente cliente, Modelo modelo, List<Cobertura> coberturas) {
         this.numero = numero;
         this.placa = placa;
         this.valor = valor;
-        this.auto = auto;
         this.fecha = fecha;
         this.cliente = cliente;
+        this.modelo = modelo;
+        this.coberturas = coberturas;
     }
+    
 
     public Integer getNumero() {
         return numero;
@@ -39,14 +44,6 @@ public class Poliza {
 
     public void setNumero(Integer numero) {
         this.numero = numero;
-    }
-
-    public String getAuto() {
-        return auto;
-    }
-
-    public void setAuto(String auto) {
-        this.auto = auto;
     }
 
     public Date getFecha() {
@@ -81,6 +78,22 @@ public class Poliza {
         this.cliente = cliente;
     }
 
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    public List<Cobertura> getCoberturas() {
+        return coberturas;
+    }
+
+    public void setCoberturas(List<Cobertura> coberturas) {
+        this.coberturas = coberturas;
+    }
+        
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -98,8 +111,5 @@ public class Poliza {
         }
         return true;
     }
-    
-    
-    
     
 }

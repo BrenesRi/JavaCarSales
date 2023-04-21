@@ -67,7 +67,6 @@ public class PolizaDao {
             e.setNumero(rs.getInt(alias + ".numero"));
             e.setPlaca(rs.getString(alias + ".placa"));
             e.setValor(rs.getDouble(alias + ".valor"));
-            e.setAuto(rs.getString(alias + ".auto"));
             e.setFecha(rs.getDate(alias+".fecha"));
             return e;
         } catch (SQLException ex) {

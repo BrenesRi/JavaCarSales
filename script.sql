@@ -24,9 +24,9 @@ create table Poliza (
   numero int auto_increment PRIMARY KEY,
   placa varchar(10) not null,
   valor double,
-  auto varchar(30),
   fecha date,
   cliente varchar(10),
+  modelo integer,
   Unique key(placa)
   );
 
@@ -60,6 +60,7 @@ create table Cobertura (
 
 alter table Cliente add foreign key (usuario) references Usuario(cedula);
 alter table Poliza add foreign key (cliente) references Cliente(cedula);
+alter table Poliza add foreign key (modelo) references Modelo(id);
 alter table Modelo add foreign key (marca) references Marca(id);
 alter table Cobertura add foreign key (categoria) references Categoria(id);
 
@@ -80,9 +81,6 @@ insert into Cliente (cedula,nombre,telefono,correo,tarjeta,usuario)
 
 insert into Cliente (cedula,nombre,telefono,correo,tarjeta,usuario) 
 	values ("333","A.Chacon","98674561","chacon@gmail.com","33312345",'333');
-
-insert into Poliza (placa,valor,auto,fecha,cliente) 
-	values ("1-111-11",100,"Toyota - Corolla","2008-7-04","111");
 
 Insert Into Marca (nombre)
         values ("Toyota");
@@ -114,3 +112,8 @@ VALUES ('Perjuicio a personas', 1, 50000, 20);
 INSERT INTO Cobertura (descripcion, categoria, costominimo, porcentaje)
 VALUES ('Perjuicio al Auto', 2, 30000, 10);
 
+insert into Poliza (placa,valor,fecha,cliente,modelo) 
+	values ("1-111-11",10000,"2008-7-04","111",1);
+
+insert into Poliza (placa,valor,fecha,cliente,modelo) 
+	values ("6-151-21",40000,"2008-8-04","222",4);

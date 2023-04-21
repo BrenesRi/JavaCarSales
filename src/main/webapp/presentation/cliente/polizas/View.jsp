@@ -27,8 +27,14 @@
             </thead>
             <tbody>
                 <% for(Poliza c:polizas){%>
-                <tr> <td><a href="presentation/cliente/poliza/show?numeroFld=<%=c.getNumero()%>"><%=c.getNumero()%> </td>  
-                        <td><%=c.getValor()%></td></tr> 
+                <tr>
+                    <td><%=c.getNumero()%> </td>  
+                    <td><%=c.getPlaca()%></td>
+                    <td><%=c.getValor()%></td>
+                    <td><%=c.getFecha()%></td>
+                    
+                
+                </tr> 
 <!--                         <tr> <td><form action="/Proyecto1/presentation/cliente/poliza/show">
                                     <input type="hidden" name="numeroFld" value="<%=c.getNumero()%>"> 
                                     <button class="link-button"> <%=c.getNumero()%> </button> </form> </td>  
