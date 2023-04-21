@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -68,6 +70,9 @@ public class PolizaDao {
             e.setPlaca(rs.getString(alias + ".placa"));
             e.setValor(rs.getDouble(alias + ".valor"));
             e.setFecha(rs.getDate(alias+".fecha"));
+            e.setAnio(rs.getInt(alias+".anio"));
+            e.setPago(rs.getString(alias+".pago"));
+            e.setCostofinal(rs.getInt(alias+".costofinal"));
             return e;
         } catch (SQLException ex) {
             return null;

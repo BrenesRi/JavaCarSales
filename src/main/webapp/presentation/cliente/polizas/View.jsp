@@ -23,7 +23,7 @@
     
         <table>
             <thead>
-                <tr> <td>Numero</td> <td>Saldo</td>  </tr>
+                <tr> <td>Numero</td> <td>Placa</td> <td>Valor</td> <td>Fecha</td>  </tr>
             </thead>
             <tbody>
                 <% for(Poliza c:polizas){%>

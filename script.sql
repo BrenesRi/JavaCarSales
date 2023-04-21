@@ -27,6 +27,9 @@ create table Poliza (
   fecha date,
   cliente varchar(10),
   modelo integer,
+  anio integer,
+  pago varchar(10),
+  costofinal integer,
   Unique key(placa)
   );
 
@@ -112,8 +115,8 @@ VALUES ('Perjuicio a personas', 1, 50000, 20);
 INSERT INTO Cobertura (descripcion, categoria, costominimo, porcentaje)
 VALUES ('Perjuicio al Auto', 2, 30000, 10);
 
-insert into Poliza (placa,valor,fecha,cliente,modelo) 
-	values ("1-111-11",10000,"2008-7-04","111",1);
+insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal) 
+	values ("1-111-11",10000,"2008-7-04","111",1,2018,"trimestral",50000);
 
-insert into Poliza (placa,valor,fecha,cliente,modelo) 
-	values ("6-151-21",40000,"2008-8-04","222",4);
+insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal) 
+	values ("6-151-21",40000,"2008-8-04","222",4,1997,"semestral",85000);
