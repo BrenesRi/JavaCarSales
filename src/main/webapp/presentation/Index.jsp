@@ -10,7 +10,7 @@
         <%@ include file="/presentation/Header.jsp" %>
 
         <div><H1 >Bienvenido a la página oficial de Seguros Automotrices</H1></div>
-        <div><img src="/Proyecto1/images/auto.jpg" width="100px" style="border-radius: 50% 10% 50% 10%;border:1px solid #000;">  </div>
+        <div><img src="/Proyecto1/images/logo.png" width="150px" style="border-radius: 50%;border:double 1px #cecece;">  </div>
         <div> <H1 >Gracias por preferirnos</H1></div>
         <div><img src="/Proyecto1/images/car-insurance.jpg" width="200px" /> 
         <img src="/Proyecto1/images/driving.png" width="130px" style="margin-left:50px;"></div>       

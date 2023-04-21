@@ -17,8 +17,8 @@
         
         <form name="form" action="presentation/cliente/datos/update" method="post" > 
             <div class="panel" style="width:30%;">
-                <div class="fila encabezado">Datos</div>
-                <div class="fila">
+                <div class="encabezado">Datos</div>
+                <div class="grid">
                        <div class="etiqueta">Cedula</div>
                       <div class="campo"><%=model.getCurrent().getCedula()%></div>
                 </div>
@@ -50,7 +50,7 @@
                                             <br>
                                            
                 </div>
-                <div class="fila encabezado"><button  style="margin-bottom: 15px">Actualizar</button> </div>
+                <div class="fila"><button  style="margin-bottom: 15px">Actualizar</button> </div>
             </div>
         </form>
     <%@ include file="/presentation/Footer.jsp" %>                  

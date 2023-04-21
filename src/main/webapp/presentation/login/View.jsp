@@ -21,7 +21,7 @@
             <div class="panel" style="width:30%; margin: 0 auto;">
                 <div class="fila" style="width: 30%; text-align: center;">
                     <h2>Login</h2>
-                    <img src="/Proyecto1/images/auto.jpg" width="70px" style="border-radius: 50% 10% 50% 10%;border:1px solid #000;">
+                    <img src="/Proyecto1/images/logo.png" width="150px" style="border-radius: 50%;border:double 1px #cecece;object-fit: cover;width:100%;height:100%;">
                 </div>
                 <div class="fila grid">
                     <div class="etiqueta">Cedula</div>
@@ -44,8 +44,8 @@
             </div>
         </form>
         <form method="post" action="presentation/login/register"> 
-        <div class="fila" style="display:flex;justify-content: center;align-items: center;">
-            <div style="margin-bottom: 15px">
+        <div class="fila">
+            <div style="display:flex;flex-flow:column nowrap;justify-content: center;align-items: center;">
                 <h2>No estás registrado?</h2>
                 <button class="boton" style="margin-bottom: 15px">Crear cuenta</button>
             </div>
