@@ -5,8 +5,10 @@
  */
 package com.mycompany.proyecto1.presentation.cliente.poliza;
 
+import com.mycompany.proyecto1.logic.Cliente;
 import com.mycompany.proyecto1.logic.Marca;
 import com.mycompany.proyecto1.logic.Modelo;
+import com.mycompany.proyecto1.logic.Poliza;
 import com.mycompany.proyecto1.logic.Service;
 import com.mycompany.proyecto1.logic.Usuario;
 import java.io.IOException;
@@ -18,10 +20,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show","/presentation/cliente/poliza/create"})
@@ -69,14 +77,59 @@ public class Controller extends HttpServlet {
     }
     
     protected String create(HttpServletRequest request){
+    Model model = (Model) request.getAttribute("model");
+    Service service = Service.instance();
+    HttpSession session = request.getSession(true);
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    Cliente cliente = new Cliente();
+    Poliza temp = new Poliza();
+    List<Modelo> modelos;
+    List<Marca> marcas;
+    Date fechaActual = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    String fechaFormateada = sdf.format(fechaActual);
+    Date fecha = new Date();
+      try {
+          fecha = sdf.parse(fechaFormateada);
+      } catch (ParseException ex) {
+          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+      }
     String placa = request.getParameter("placaFld");
-    String marca = request.getParameter("modeloFld");
+    String modeloaux = request.getParameter("modeloFld");
     String anio = request.getParameter("anioFld");
     String valor = request.getParameter("valorFld");
     String pago = request.getParameter("pagoFld");
-        System.out.println("Hola");
-        return "";
-    // hacer lo que necesites con los valores recuperados
+    try {
+            cliente = service.clienteFind(usuario);
+        } catch (Exception ex) {
+            cliente=null;
+        }
+    try {        
+            modelos = service.modelosFind();
+            marcas = service.marcasFind();       
+          
+          temp.setPlaca(placa);
+          temp.setValor(Double.parseDouble(valor));
+          temp.setFecha(fecha);
+          temp.setCliente(cliente);
+          
+          for (Modelo modelo : modelos) {
+                   if(modeloaux.equals(modelo.getDescripcion())){
+                      temp.setModeloOb(modelo);   
+                   }
+               }
+          
+          temp.setAnio(Integer.parseInt(anio));
+          temp.setPago(pago);
+          
+          
+            model.setCurrent(temp);
+        ;
+            //session.setAttribute("usuario", real);
+            return "/presentation/cliente/polizas/View.jsp";
+        } catch (Exception ex) {
+            return "";
+        }
 }
 
     
