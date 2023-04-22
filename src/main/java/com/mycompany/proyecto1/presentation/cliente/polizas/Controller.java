@@ -137,8 +137,7 @@ public class Controller extends HttpServlet {
                    }       
 
             model.setSeleccionado(temp);
-            System.out.println("Hola, mundo!");
-            return "/presentation/cliente/polizas/View.jsp";
+            return "/presentation/cliente/polizas/ViewDetail.jsp";
         } catch (Exception ex) {
             return "";
         }

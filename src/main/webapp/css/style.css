@@ -68,16 +68,16 @@ footer img{
     padding: 10px;
   }
   tr:nth-child(even) {
-    background-color: #8bb0e9;
+    background-color: #a8b7cc;
   }
   tr:nth-child(odd) {
-    background-color: #769bd3;
+    background-color: #a8b7cc;
   }
   tr:hover{
-    background-color:  #cecece;
+    background-color:  #edeef5;
   }
   a {
-    color: #3498db;
+    color: #090453;
     text-decoration: none;
   }
 
@@ -87,7 +87,7 @@ footer img{
     margin-top: 5px;
     border: 3px solid gray;
     padding: 10px;
-    background: linear-gradient(to right, #8cb0f3, #83c5f1);;
+    background: linear-gradient(to right, #e1e4ea, #e8eef2);;
     box-shadow: -10px 10px;
     min-width: 294px;
     text-align: center;
@@ -97,7 +97,7 @@ footer img{
     align-items: center;
 }
 .panel h2{
-    color:#000;
+    color:#042456;
     font-style: italic;
 }
 .grid{
@@ -137,7 +137,7 @@ input[type=text].is-invalid,input[type=password].is-invalid{
 }
 
 .form a{
-    background: #5891B9;
+    background: #d7e5f0;
     padding:5px;
     text-decoration: none;
     color:#fff;
@@ -149,13 +149,13 @@ input[type=text].is-invalid,input[type=password].is-invalid{
 .link-button {
     background: none;
     border: none;
-    color: #0066ff;
+    color: #041a3a;
     text-decoration: underline;
     cursor: pointer;
 }
 
 div button{
-  background-color: rgb(31, 28, 184);
+  background-color: rgb(20, 17, 207);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -167,6 +167,15 @@ div button{
   cursor: pointer;
 }
 div button:hover{
-  background-color: #fff;
-  color: #2212ff;
+  background-color: #021153;
+  color: #ffffff;
 }
+
+.fila label {
+  font-size: 22px;
+}
+
+.fila span {
+  font-size: 18px;
+}
+
