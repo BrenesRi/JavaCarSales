@@ -27,7 +27,8 @@ import java.util.Set;
  *
  * @author ribre
  */
-@WebServlet(name = "AdminController", urlPatterns = {"/presentation/admin/datos/show","/presentation/admin/datos/detail"})
+@WebServlet(name = "AdminController", urlPatterns = {"/presentation/admin/datos/show","/presentation/admin/datos/detail",
+                                                                                "/presentation/admin/datos/detailpoliza"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, 
@@ -42,6 +43,9 @@ public class Controller extends HttpServlet {
               break;
           case "/presentation/admin/datos/detail":
               viewUrl = this.showDetail(request);
+              break;
+          case "/presentation/admin/datos/detailpoliza":
+              viewUrl = this.showDetailPoliza(request);
               break;
               
         }          
@@ -152,8 +156,45 @@ public class Controller extends HttpServlet {
                     
             //model.setCuentas(service.cuentasFind(cliente));
             model.setCuentas(polizas);
+            model.setCurrent(cliente);
             //session.setAttribute("usuario", real);
             return "/presentation/admin/datos/ViewPolizas.jsp";
+        } catch (Exception ex) {
+            return "";
+        }
+}
+    
+    public String showDetailPoliza(HttpServletRequest request) {
+        String id = request.getParameter("numeroFld");
+        Model model = (Model) request.getAttribute("model");
+        Service service = Service.instance();
+        List<Poliza> polizas;
+        List<Modelo> modelos;
+        List<Marca> marcas;
+        Poliza temp = new Poliza();
+         try {        
+            modelos = service.modelosFind();
+            //polizas = service.cuentasFind(model.getCurrent());
+            marcas = service.marcasFind();
+            
+          temp = service.polizaFind(id);
+            
+          for (Modelo modelo : modelos) {
+                   if(temp.getModelo()==modelo.getId()){
+                      temp.setModeloOb(modelo);   
+                   }
+               }
+          
+          for (Marca marca : marcas) {
+                   if(Objects.equals(temp.getModeloOb().getMarcaId(), marca.getId()))
+                      temp.getModeloOb().setMarca(marca);
+          }
+          
+          temp.setCoberturas(service.coberturasFindByPoliza(""+temp.getNumero()));
+
+            model.setSeleccionado(temp);
+            System.out.println("Hola, mundo!");
+            return "/presentation/admin/datos/ViewPolizaDetail.jsp";
         } catch (Exception ex) {
             return "";
         }

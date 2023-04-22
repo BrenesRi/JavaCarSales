@@ -49,7 +49,7 @@
                     </td>
                     <td><img src="presentation/admin/modelo/getImage?id=<%=c.getModeloOb().getId()%>" width="140" height ="80"></td>
                     <td><%=c.getCostofinal()%> </td>
-                   <td><a href="presentation/cliente/polizas/detail?numeroFld=<%=c.getNumero()%>"><img src="images/lupa.png" width="50" height ="50"></td>
+                   <td><a href="presentation/admin/datos/detailpoliza?numeroFld=<%=c.getNumero()%>"><img src="images/lupa.png" width="50" height ="50"></td>
                     
                     
                 
