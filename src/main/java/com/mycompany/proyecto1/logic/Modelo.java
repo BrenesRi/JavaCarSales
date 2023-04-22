@@ -12,10 +12,18 @@ public class Modelo {
     Integer id;
     String descripcion;
     Marca marca;
+    Integer marcaId;
 
     public Modelo(String descripcion, Marca marca) {
         this.descripcion = descripcion;
         this.marca = marca;
+        this.marcaId = 0;
+    }
+    
+    public Modelo(String descripcion, Marca marca, Integer marcaId) {
+        this.descripcion = descripcion;
+        this.marca = marca;
+        this.marcaId = marcaId;
     }
 
     public Modelo() {
@@ -45,6 +53,14 @@ public class Modelo {
         this.marca = marca;
     }
 
+    public Integer getMarcaId() {
+        return marcaId;
+    }
+
+    public void setMarcaId(Integer marcaId) {
+        this.marcaId = marcaId;
+    }
+    
     @Override
     public String toString() {
         return "Modelo{" + "id=" + id + ", descripcion=" + descripcion + ", marca=" + marca + '}';
