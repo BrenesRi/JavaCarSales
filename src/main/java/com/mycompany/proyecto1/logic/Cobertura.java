@@ -11,6 +11,7 @@ package com.mycompany.proyecto1.logic;
 public class Cobertura {
   Integer id;
   String descripcion;
+  Integer categoriaId;
   Categoria categoria;
   int costominimo;
   int porcentaje;
@@ -65,7 +66,13 @@ public class Cobertura {
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
-    
-    
+
+    public Integer getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Integer categoriaId) {
+        this.categoriaId = categoriaId;
+    }
   
 }

@@ -64,6 +64,7 @@ public class CoberturaDao {
             if (rs.next()) {
             resultado.setId(Integer.valueOf(rs.getString("id")));
             resultado.setDescripcion(rs.getString("descripcion"));
+            resultado.setCategoriaId(Integer.valueOf(rs.getString("categoria")));
             return resultado;
         } else {
             return null;
@@ -97,6 +98,22 @@ public class CoberturaDao {
                     + "where e.categoria=?";
             PreparedStatement stm = db.prepareStatement(sql);
             stm.setString(1, ""+numero);
+            ResultSet rs = db.executeQuery(stm);
+            while (rs.next()) {
+                resultado.add(from(rs, "e"));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+    
+    public List<Cobertura> findCobertura() {
+        List<Cobertura> resultado = new ArrayList<>();
+        try {
+            String sql = "select * "
+                    + "from "
+                    + "Cobertura e ";
+            PreparedStatement stm = db.prepareStatement(sql);
             ResultSet rs = db.executeQuery(stm);
             while (rs.next()) {
                 resultado.add(from(rs, "e"));

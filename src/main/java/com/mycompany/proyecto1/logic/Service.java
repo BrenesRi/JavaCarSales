@@ -87,6 +87,11 @@ public class Service {
         List<Cliente> clientes = clienteDao.findClientes();
         return clientes;
     }
+    
+    public List<Cobertura> coberturasFind() {
+        List<Cobertura> coberturas = coberturaDao.findCobertura();
+        return coberturas;
+    }
 
     public List<Poliza> cuentasFind(Cliente cliente) throws Exception {
         List<Poliza> polizas = polizaDao.findByCliente(cliente);

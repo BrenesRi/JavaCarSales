@@ -6,6 +6,7 @@
 package com.mycompany.proyecto1.presentation.cliente.poliza;
 
 import com.mycompany.proyecto1.logic.Cliente;
+import com.mycompany.proyecto1.logic.Cobertura;
 import com.mycompany.proyecto1.logic.Marca;
 import com.mycompany.proyecto1.logic.Modelo;
 import com.mycompany.proyecto1.logic.Poliza;
@@ -60,9 +61,12 @@ public class Controller extends HttpServlet {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         List<Marca> marcas;
         List<Modelo> modelos = new ArrayList<>();
+        List<Cobertura> coberturas;
         try {
             marcas = service.marcasFind();
             modelos = service.modelosFind();
+            //coberturas = service.cobe
+            
         } catch (Exception ex) {
             marcas=null;
         }
