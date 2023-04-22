@@ -25,7 +25,7 @@
                 <input type="text" id="placa" name="placaFld">
                 <button  style="margin-bottom: 15px">Enviar</button>
             </form>
-            <form method="post" action="presentation/polizas/search">
+            <form method="post" action="presentation/cliente/poliza/show">
                 <button  style="margin-bottom: 15px">Añadir nueva Poliza</button>        
             </form>
                 <table>

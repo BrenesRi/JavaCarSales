@@ -5,6 +5,8 @@
  */
 package com.mycompany.proyecto1.presentation.cliente.poliza;
 
+import com.mycompany.proyecto1.logic.Marca;
+import com.mycompany.proyecto1.logic.Modelo;
 import com.mycompany.proyecto1.logic.Service;
 import com.mycompany.proyecto1.logic.Usuario;
 import java.io.IOException;
@@ -16,9 +18,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
-@WebServlet(name = "ClienteCuentaController", urlPatterns = {"/presentation/cliente/poliza/show"})
+@WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show"})
 public class Controller extends HttpServlet {
     
   protected void processRequest(HttpServletRequest request, 
@@ -37,51 +43,28 @@ public class Controller extends HttpServlet {
   }
 
     public String show(HttpServletRequest request) {
-        try{
-            Map<String,String> errores =  this.validar(request);
-            if(errores.isEmpty()){
-                this.updateModel(request);          
-                return this.showAction(request);
-            }
-            else{
-                request.setAttribute("errores", errores);
-                return "/presentation/cliente/datos/View.jsp"; 
-            }            
-        }
-        catch(Exception e){
-            return "/presentation/Error.jsp";             
-        }   
-    }
-
-    Map<String,String> validar(HttpServletRequest request){
-        Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("numeroFld").isEmpty()){
-            errores.put("numeroFld","Cuenta requerida");
-        }
-        return errores;
-    }
-    
-    void updateModel(HttpServletRequest request){
-       Model model= (Model) request.getAttribute("model");
-       
-        model.getCurrent().setPlaca(request.getParameter("numeroFld"));
-   }    
-    
-    public String showAction(HttpServletRequest request) {
-        Model model = (Model) request.getAttribute("model");
+    Model model = (Model) request.getAttribute("model");
         Service service = Service.instance();
         HttpSession session = request.getSession(true);
         Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<Marca> marcas;
+        List<Modelo> modelos = new ArrayList<>();
+        try {
+            marcas = service.marcasFind();
+            modelos = service.modelosFind();
+        } catch (Exception ex) {
+            marcas=null;
+        }
         try {        
-            model.setCurrent(service.polizaFind(model.getCurrent().getPlaca()));
-            if (!(model.getCurrent().getCliente().getCedula().equals(usuario.getCedula()))) 
-                throw new Exception("Poliza no pertenece al cliente");
+            model.setMarcas(marcas);
+            model.setModelos(modelos);
+            
             return "/presentation/cliente/poliza/View.jsp";
         } catch (Exception ex) {
-            return "/presentation/Error.jsp";
-        }
+            return "";
+        }   
     }
-   
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
