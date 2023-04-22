@@ -27,7 +27,7 @@ public class Model{
     List<Cobertura> coberturas;
 
     public Model() {
-        current = new Poliza(0,"",0,new Date(),new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
+        current = new Poliza(0,"",0,"",new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
         List<Marca> marcas = new ArrayList<>();
         List<Modelo> modelos = new ArrayList<>();
         List<Cobertura> coberturas = new ArrayList<>();

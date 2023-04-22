@@ -18,7 +18,7 @@ public class Poliza {
     Integer numero;
     String placa;
     double valor;
-    Date fecha;
+    String fecha;
     Cliente cliente;
     int modelo;
     Modelo modeloOb;
@@ -28,10 +28,10 @@ public class Poliza {
     List<Cobertura> coberturas;
          
     public Poliza() {
-        this(0,"",0,new Date(),new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
+        this(0,"",0,"",new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
     }
 
-    public Poliza(Integer numero, String placa, double valor, Date fecha, Cliente cliente, int modelo, Modelo modeloOb, int anio, String pago, int costofinal, List<Cobertura> coberturas) {
+    public Poliza(Integer numero, String placa, double valor, String fecha, Cliente cliente, int modelo, Modelo modeloOb, int anio, String pago, int costofinal, List<Cobertura> coberturas) {
         this.numero = numero;
         this.placa = placa;
         this.valor = valor;
@@ -54,11 +54,11 @@ public class Poliza {
         this.numero = numero;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

@@ -110,7 +110,7 @@ public class Controller extends HttpServlet {
           
           temp.setPlaca(placa);
           temp.setValor(Double.parseDouble(valor));
-          temp.setFecha(fecha);
+          temp.setFecha(fechaFormateada);
           temp.setCliente(cliente);
           
           for (Modelo modelo : modelos) {
@@ -124,9 +124,9 @@ public class Controller extends HttpServlet {
           
           
             model.setCurrent(temp);
-        ;
-            //session.setAttribute("usuario", real);
-            return "/presentation/cliente/polizas/View.jsp";
+        
+            session.setAttribute("poliza", temp);
+            return "/presentation/cliente/poliza/ViewCoberturas.jsp";
         } catch (Exception ex) {
             return "";
         }
