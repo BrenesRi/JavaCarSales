@@ -4,17 +4,20 @@
     <head>
         <%@ include file="/presentation/Head.jsp" %>
         <title>Seguros Automotrices</title> 
-        
+
     </head>
     <body >
         <%@ include file="/presentation/Header.jsp" %>
 
-        <div><H1 >Bienvenido a la página oficial de Seguros Automotrices</H1></div>
-        <div><img src="/Proyecto1/images/logo.png" width="150px" style="border-radius: 50%;border:double 1px #cecece;">  </div>
-        <div> <H1 >Gracias por preferirnos</H1></div>
-        <div><img src="/Proyecto1/images/car-insurance.jpg" width="200px" /> 
-        <img src="/Proyecto1/images/driving.png" width="130px" style="margin-left:50px;"></div>       
-
+        <div style="margin: 0 auto"><H1 style="font-weight: bold; background-color:#34495E; color: #bbe0e9 ">Bienvenido a la página oficial de Seguros Automotrices</H1></div>
+        <section style="margin: 0 auto">
+            <img src="/Proyecto1/images/foto1.jpg" >
+            <img src="/Proyecto1/images/foto2.jpg" > 
+            <img src="/Proyecto1/images/foto3.jpg" > 
+            <img src="/Proyecto1/images/foto4.jpg" > 
+            <img src="/Proyecto1/images/foto5.jpg" > 
+            <img src="/Proyecto1/images/foto6.jpg" >   
+        </section>     
         <%@ include file="/presentation/Footer.jsp" %>
     </body>
 </html>

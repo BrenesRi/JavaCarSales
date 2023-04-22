@@ -179,3 +179,23 @@ div button:hover{
   font-size: 18px;
 }
 
+section {
+    display: flex;
+    width: 800px;
+    height: 600px;   
+}
+
+section img {
+    width: 0px;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: .5s ease;
+}
+
+section img:hover{
+    cursor: crosshair;
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+}
