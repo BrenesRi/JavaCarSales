@@ -5,6 +5,7 @@
  */
 package com.mycompany.proyecto1.presentation.cliente.poliza;
 
+import com.mycompany.proyecto1.logic.Categoria;
 import com.mycompany.proyecto1.logic.Cliente;
 import com.mycompany.proyecto1.logic.Cobertura;
 import com.mycompany.proyecto1.logic.Marca;
@@ -61,11 +62,13 @@ public class Controller extends HttpServlet {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         List<Marca> marcas;
         List<Modelo> modelos = new ArrayList<>();
-        List<Cobertura> coberturas;
+        List<Cobertura> coberturas = new ArrayList<>();
+        List<Categoria> categorias = new ArrayList<>();
         try {
             marcas = service.marcasFind();
             modelos = service.modelosFind();
-            //coberturas = service.cobe
+            coberturas = service.coberturasFind();
+            categorias = service.categoriasFind();
             
         } catch (Exception ex) {
             marcas=null;
@@ -73,6 +76,8 @@ public class Controller extends HttpServlet {
         try {        
             model.setMarcas(marcas);
             model.setModelos(modelos);
+            model.setCoberturas(coberturas);
+            model.setCategorias(categorias);
             
             return "/presentation/cliente/poliza/View.jsp";
         } catch (Exception ex) {

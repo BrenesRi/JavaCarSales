@@ -8,6 +8,7 @@
 <%@page import="com.mycompany.proyecto1.logic.Marca"%>
 <%@page import="com.mycompany.proyecto1.logic.Modelo"%>
 <%@page import="com.mycompany.proyecto1.logic.Cobertura"%>
+<%@page import="com.mycompany.proyecto1.logic.Categoria"%>
 
 <%@page import="com.mycompany.proyecto1.presentation.cliente.poliza.Model"%>
 <%@page import="java.util.List"%>
@@ -21,6 +22,7 @@
     List<Marca> marcas = model.getMarcas();
     List<Modelo> modelos = model.getModelos();
     List<Cobertura> coberturas = model.getCoberturas();
+    List<Categoria> categorias = model.getCategorias();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -33,6 +35,23 @@
         <%@ include file="/presentation/Header.jsp" %>
         <div style="margin: 0 auto"><H1 style="font-weight: bold; background-color:#34495E; color: #bbe0e9 ">Coberturas deseadas</H1></div>
         <div class="panel" style="width:30%;">
+            <form method="post" action="presentation/cliente/poliza/create">
+                <label for="coberturas">Coberturas disponibles:</label>
+                <select id="coberturas" name="coberturasFld" multiple>
+                    <% for(Categoria c: categorias){%>
+                    <optgroup label="<%= c.getDescripcion() %>"> 
+                        <% for(Cobertura co: coberturas){%>
+                        <% if(co.getCategoriaId()==c.getId()){%>
+                        <option value="<%= co.getDescripcion() %>"><%= co.getDescripcion() %></option>
+                        <% } %>
+                        <% } %>
+                        <% } %>
+                    </optgroup>
+                </select>
+                   <br> <br>
+                <button  style="margin-bottom: 15px">Siguiente (Coberturas) -></button> 
+                    
+            </form>
         </div>
         <%@ include file="/presentation/Footer.jsp" %>
     </body>

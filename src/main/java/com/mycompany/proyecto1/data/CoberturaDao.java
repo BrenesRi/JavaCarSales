@@ -45,6 +45,7 @@ public class CoberturaDao {
             e.setDescripcion(rs.getString(alias + ".descripcion"));
             e.setCostominimo(rs.getInt( alias + ".costominimo"));
             e.setPorcentaje(rs.getInt(alias + ".porcentaje"));
+            e.setCategoriaId(rs.getInt(alias + ".categoria"));
             return e;
         } catch (SQLException ex) {
             return null;
@@ -64,7 +65,6 @@ public class CoberturaDao {
             if (rs.next()) {
             resultado.setId(Integer.valueOf(rs.getString("id")));
             resultado.setDescripcion(rs.getString("descripcion"));
-            resultado.setCategoriaId(Integer.valueOf(rs.getString("categoria")));
             return resultado;
         } else {
             return null;

@@ -5,6 +5,7 @@
  */
 package com.mycompany.proyecto1.presentation.cliente.poliza;
 
+import com.mycompany.proyecto1.logic.Categoria;
 import com.mycompany.proyecto1.logic.Cliente;
 import com.mycompany.proyecto1.logic.Cobertura;
 import com.mycompany.proyecto1.logic.Marca;
@@ -25,12 +26,14 @@ public class Model{
     List<Marca> marcas;
     List<Modelo> modelos;
     List<Cobertura> coberturas;
+    List<Categoria> categorias;
 
     public Model() {
         current = new Poliza(0,"",0,"",new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
         List<Marca> marcas = new ArrayList<>();
         List<Modelo> modelos = new ArrayList<>();
         List<Cobertura> coberturas = new ArrayList<>();
+        List<Categoria> categorias = new ArrayList<>();     
     }
 
     public List<Marca> getMarcas() {
@@ -64,4 +67,14 @@ public class Model{
     public void setCurrent(Poliza current) {
         this.current = current;
     }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+    
+    
 }
