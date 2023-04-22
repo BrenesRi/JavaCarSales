@@ -20,28 +20,31 @@ public class Poliza {
     double valor;
     Date fecha;
     Cliente cliente;
-    Modelo modelo;
+    int modelo;
+    Modelo modeloOb;
     int anio;
     String pago;
     int costofinal;
     List<Cobertura> coberturas;
          
     public Poliza() {
-        this(0,"",0,new Date(),new Cliente(), new Modelo(),0,"",0,new ArrayList<>());
+        this(0,"",0,new Date(),new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
     }
 
-    public Poliza(Integer numero, String placa, double valor, Date fecha, Cliente cliente, Modelo modelo, int anio, String pago, int costofinal, List<Cobertura> coberturas) {
+    public Poliza(Integer numero, String placa, double valor, Date fecha, Cliente cliente, int modelo, Modelo modeloOb, int anio, String pago, int costofinal, List<Cobertura> coberturas) {
         this.numero = numero;
         this.placa = placa;
         this.valor = valor;
         this.fecha = fecha;
         this.cliente = cliente;
         this.modelo = modelo;
+        this.modeloOb = modeloOb;
         this.anio = anio;
         this.pago = pago;
         this.costofinal = costofinal;
         this.coberturas = coberturas;
     }
+
 
     public Integer getNumero() {
         return numero;
@@ -83,13 +86,22 @@ public class Poliza {
         this.cliente = cliente;
     }
 
-    public Modelo getModelo() {
+    public Modelo getModeloOb() {
+        return modeloOb;
+    }
+
+    public void setModeloOb(Modelo modelo) {
+        this.modeloOb = modelo;
+    }
+
+    public int getModelo() {
         return modelo;
     }
 
-    public void setModelo(Modelo modelo) {
+    public void setModelo(int modelo) {
         this.modelo = modelo;
     }
+    
 
     public int getAnio() {
         return anio;

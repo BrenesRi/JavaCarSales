@@ -6,6 +6,9 @@
 package com.mycompany.proyecto1.presentation.cliente.polizas;
 
 import com.mycompany.proyecto1.logic.Cliente;
+import com.mycompany.proyecto1.logic.Marca;
+import com.mycompany.proyecto1.logic.Modelo;
+import com.mycompany.proyecto1.logic.Poliza;
 import com.mycompany.proyecto1.logic.Service;
 import com.mycompany.proyecto1.logic.Usuario;
 import java.io.IOException;
@@ -15,6 +18,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @WebServlet(name = "ClientePolizasController", urlPatterns = {"/presentation/cliente/polizas/show"})
@@ -43,16 +49,41 @@ public class Controller extends HttpServlet {
         Model model = (Model) request.getAttribute("model");
         Service service = Service.instance();
         HttpSession session = request.getSession(true);
- 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         Cliente cliente;
+        List<Poliza> polizas;
+        List<Modelo> modelos;
+        List<Marca> marcas;
         try {
             cliente = service.clienteFind(usuario);
         } catch (Exception ex) {
             cliente=null;
         }
         try {        
-            model.setCuentas(service.cuentasFind(cliente));
+            modelos = service.modelosFind();
+            polizas = service.cuentasFind(cliente);
+            marcas = service.marcasFind();
+            
+          for (Poliza poliza : polizas) {
+               for (Modelo modelo : modelos) {
+                   if(poliza.getModelo()==modelo.getId()){
+                      poliza.setModeloOb(modelo);
+                      //poliza.getModeloOb().setMarca(service.marcaFind(poliza.get));
+                       
+                   }
+               }
+                 }
+          
+//          for (Poliza poliza : polizas) {
+//               for (Marca marca : marcas) {
+//                   if(poliza.getModeloOb().getMarca().getId()==)){
+//                      poliza.getModeloOb().setMarca(marca);
+//                   }
+//               }
+//                 }
+                    
+            //model.setCuentas(service.cuentasFind(cliente));
+            model.setCuentas(polizas);
             return "/presentation/cliente/polizas/View.jsp";
         } catch (Exception ex) {
             return "";

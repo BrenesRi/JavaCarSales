@@ -21,7 +21,7 @@ public class Model{
     Poliza current;
 
     public Model() {
-        current = new Poliza(0,"",0,new Date(),new Cliente(), new Modelo(),0,"",0,new ArrayList<>());
+        current = new Poliza(0,"",0,new Date(),new Cliente(),0, new Modelo(),0,"",0,new ArrayList<>());
     }
 
     public Poliza getCurrent() {

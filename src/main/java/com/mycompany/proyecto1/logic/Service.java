@@ -101,6 +101,11 @@ public class Service {
     public Modelo modeloFindByNombre(String nombre) throws Exception {
         return modeloDao.readByNombre(nombre);
     }
+    
+    public Modelo modeloFindById(int nombre) throws Exception {
+        return modeloDao.readById(nombre);
+    }
+    
 
     public void clienteCreate(Cliente cliente) throws Exception {
         clienteDao.create(cliente);

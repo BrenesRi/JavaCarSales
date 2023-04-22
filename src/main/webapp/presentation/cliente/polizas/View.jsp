@@ -32,6 +32,8 @@
                     <td><%=c.getPlaca()%></td>
                     <td><%=c.getValor()%></td>
                     <td><%=c.getFecha()%></td>
+                    <td><%=c.getModeloOb().getDescripcion()%></td>
+                    
                     
                 
                 </tr> 
