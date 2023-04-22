@@ -39,7 +39,7 @@ public class Controller extends HttpServlet {
               viewUrl = this.show(request);
               break;
           case "/presentation/cliente/polizas/detail":
-              viewUrl = this.show(request);
+              viewUrl = this.showDetail(request);
               break;   
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
@@ -93,6 +93,51 @@ public class Controller extends HttpServlet {
             //model.setCuentas(service.cuentasFind(cliente));
             model.setCuentas(polizas);
             //session.setAttribute("usuario", real);
+            return "/presentation/cliente/polizas/View.jsp";
+        } catch (Exception ex) {
+            return "";
+        }
+    }
+    
+    public String showDetail(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model");
+        String numero = request.getParameter("numeroFld");
+         Service service = Service.instance();
+        HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        Cliente cliente;
+        List<Poliza> polizas;
+        Poliza temp = new Poliza();
+        List<Modelo> modelos;
+        List<Marca> marcas;
+        try {
+            cliente = service.clienteFind(usuario);
+        } catch (Exception ex) {
+            cliente=null;
+        }
+         try {        
+            modelos = service.modelosFind();
+            polizas = service.cuentasFind(cliente);
+            marcas = service.marcasFind();
+            
+          for (Poliza poliza : polizas) {
+                   if(Objects.equals(poliza.getNumero(), Integer.valueOf(numero))){
+                      temp = poliza;   
+                   }
+               }
+          for (Modelo modelo : modelos) {
+                   if(temp.getModelo()==modelo.getId()){
+                      temp.setModeloOb(modelo);   
+                   }
+               }
+          
+          for (Marca marca : marcas) {
+                   if(Objects.equals(temp.getModeloOb().getMarcaId(), marca.getId()))
+                      temp.getModeloOb().setMarca(marca);
+                   }       
+
+            model.setSeleccionado(temp);
+            System.out.println("Hola, mundo!");
             return "/presentation/cliente/polizas/View.jsp";
         } catch (Exception ex) {
             return "";

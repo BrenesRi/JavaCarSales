@@ -44,7 +44,7 @@ public class PolizaDao {
             throw new Exception("Poliza no Existe");
         }
     }
-
+    
     public List<Poliza> findByCliente(Cliente cliente) {
         List<Poliza> resultado = new ArrayList<>();
         try {
