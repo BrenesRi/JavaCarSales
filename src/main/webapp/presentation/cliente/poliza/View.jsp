@@ -28,13 +28,13 @@
         <%@ include file="/presentation/Header.jsp" %>
         <div style="margin: 0 auto"><H1 style="font-weight: bold; background-color:#34495E; color: #bbe0e9 ">Registro de una nueva Poliza Automotriz</H1></div>
         <div class="panel" style="width:30%;">
-            <form method="post" action="presentation/cliente/poliza/create" enctype="multipart/form-data">
+            <form method="post" action="presentation/cliente/poliza/create">
 
                 <label for="placa">Placa:</label>
                 <input type="text" id="placa" name="placaFld">
                 <br> <br>
                 <label for="modelo">Marca y Modelo:</label>
-                <select id="marca" name="marcaFld">
+                <select id="modelo" name="modeloFld">
                     <% for(Marca m: marcas){%>
                     <optgroup label="<%= m.getNombre() %>"> 
                         <% for(Modelo mo: modelos){%>

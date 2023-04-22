@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 
-@WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show"})
+@WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show","/presentation/cliente/poliza/create"})
 public class Controller extends HttpServlet {
     
   protected void processRequest(HttpServletRequest request, 
@@ -37,6 +37,9 @@ public class Controller extends HttpServlet {
         switch (request.getServletPath()) {
           case "/presentation/cliente/poliza/show":
               viewUrl = this.show(request);
+              break;
+          case "/presentation/cliente/poliza/create":
+              viewUrl = this.create(request);
               break;
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
@@ -64,6 +67,18 @@ public class Controller extends HttpServlet {
             return "";
         }   
     }
+    
+    protected String create(HttpServletRequest request){
+    String placa = request.getParameter("placaFld");
+    String marca = request.getParameter("modeloFld");
+    String anio = request.getParameter("anioFld");
+    String valor = request.getParameter("valorFld");
+    String pago = request.getParameter("pagoFld");
+        System.out.println("Hola");
+        return "";
+    // hacer lo que necesites con los valores recuperados
+}
+
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
