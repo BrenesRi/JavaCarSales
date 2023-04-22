@@ -129,6 +129,9 @@ insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal)
 	values ("1-111-11",10000,"2008-7-04","111",1,2018,"trimestral",50000);
 
 insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal) 
+	values ("2-222-22",730000,"2023-7-04","111",3,2023,"trimestral",85000);
+
+insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal) 
 	values ("6-151-21",40000,"2008-8-04","222",4,1997,"semestral",85000);
 
 insert into PC(poliza,cobertura)

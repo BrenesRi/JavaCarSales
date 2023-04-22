@@ -96,7 +96,12 @@ public class Service {
         cliente.setPolizas(polizas);
         return polizas;
     }
-
+    
+    public List<Poliza> cuentasFindbyPlaca(String placa) throws Exception {
+        List<Poliza> polizas = polizaDao.findByPlaca(placa);
+        return polizas;
+    }
+    
     public List<Cobertura> coberturasFindByPoliza(String poliza) throws Exception {
          return pcdao.read(poliza);    
     }

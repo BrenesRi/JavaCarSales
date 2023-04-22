@@ -62,6 +62,24 @@ public class PolizaDao {
         }
         return resultado;
     }
+    
+    public List<Poliza> findByPlaca(String placa) {
+        List<Poliza> resultado = new ArrayList<>();
+        try {
+            String sql = "select * "
+                    + "from "
+                    + "Poliza e "
+                    + "where e.placa=?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1,placa);
+            ResultSet rs = db.executeQuery(stm);
+            while (rs.next()) {
+                resultado.add(from(rs, "e"));
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
 
     private Poliza from(ResultSet rs, String alias) {
         try {

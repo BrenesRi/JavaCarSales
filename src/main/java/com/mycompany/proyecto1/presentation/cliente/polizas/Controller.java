@@ -24,7 +24,9 @@ import java.util.Objects;
 import java.util.Set;
 
 
-@WebServlet(name = "ClientePolizasController", urlPatterns = {"/presentation/cliente/polizas/show","/presentation/cliente/polizas/detail"})
+@WebServlet(name = "ClientePolizasController", urlPatterns = {"/presentation/cliente/polizas/show",
+                                                              "/presentation/cliente/polizas/detail",
+                                                              "/presentation/cliente/polizas/search"})
 public class Controller extends HttpServlet {
     
   protected void processRequest(HttpServletRequest request, 
@@ -40,7 +42,10 @@ public class Controller extends HttpServlet {
               break;
           case "/presentation/cliente/polizas/detail":
               viewUrl = this.showDetail(request);
-              break;   
+              break; 
+          case "/presentation/cliente/polizas/search":
+              viewUrl = this.showSearch(request);
+              break; 
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
   }
@@ -143,6 +148,63 @@ public class Controller extends HttpServlet {
             return "/presentation/cliente/polizas/ViewDetail.jsp";
         } catch (Exception ex) {
             return "";
+        }
+    }
+    
+    public String showSearch(HttpServletRequest request) {
+        Model model = (Model) request.getAttribute("model");
+        Service service = Service.instance();
+        String placa = request.getParameter("placaFld");
+        if("".equals(placa)){
+        return this.showAction(request);
+        } else {
+        HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        Cliente cliente;
+        List<Poliza> polizas;
+        List<Modelo> modelos;
+        List<Marca> marcas;
+        try {
+            cliente = service.clienteFind(usuario);
+        } catch (Exception ex) {
+            cliente=null;
+        }
+        try {        
+            modelos = service.modelosFind();
+            polizas = service.cuentasFindbyPlaca(placa);
+            marcas = service.marcasFind();
+            
+          for (Poliza poliza : polizas) {
+               for (Modelo modelo : modelos) {
+                   if(poliza.getModelo()==modelo.getId()){
+                      poliza.setModeloOb(modelo);   
+                   }
+               }
+                 }
+          for (Poliza poliza : polizas) {
+               for (Marca marca : marcas) {
+                   if(Objects.equals(poliza.getModeloOb().getMarcaId(), marca.getId()))
+                      poliza.getModeloOb().setMarca(marca);
+                   }
+               }
+                      
+//          for (Poliza poliza : polizas) {
+//               for (Marca marca : marcas) {
+//                   if(poliza.getModeloOb().getMarca().getId()==)){
+//                      poliza.getModeloOb().setMarca(marca);
+//                   }
+//               }
+//                 }
+                    
+            //model.setCuentas(service.cuentasFind(cliente));
+
+            model.setCuentas(polizas);
+            //session.setAttribute("usuario", real);
+            return "/presentation/cliente/polizas/View.jsp";    
+      
+        } catch (Exception ex) {
+            return "";
+        }
         }
     }
    
