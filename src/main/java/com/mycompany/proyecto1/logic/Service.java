@@ -72,6 +72,10 @@ public class Service {
     public Marca marcaFind(String nombre) throws Exception {
         return marcaDao.read(nombre);
     }
+    
+        public Cobertura coberturaFindbyId(String id) throws Exception {
+        return coberturaDao.readById(id);
+    }
 
     public List<Marca> marcasFind() {
         List<Marca> marcas = marcaDao.findMarcas();

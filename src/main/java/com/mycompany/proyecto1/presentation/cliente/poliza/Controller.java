@@ -34,7 +34,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-@WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show","/presentation/cliente/poliza/create"})
+@WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show","/presentation/cliente/poliza/create",
+                                                                            "/presentation/cliente/poliza/coberturas"})
 public class Controller extends HttpServlet {
     
   protected void processRequest(HttpServletRequest request, 
@@ -50,6 +51,9 @@ public class Controller extends HttpServlet {
               break;
           case "/presentation/cliente/poliza/create":
               viewUrl = this.create(request);
+              break;
+          case "/presentation/cliente/poliza/coberturas":
+              viewUrl = this.coberturas(request);
               break;
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
@@ -115,7 +119,9 @@ public class Controller extends HttpServlet {
         }
     try {        
             modelos = service.modelosFind();
-            marcas = service.marcasFind();       
+            marcas = service.marcasFind();
+        List<Cobertura> coberturas = service.coberturasFind();
+        List<Categoria> categorias = service.categoriasFind();
           
           temp.setPlaca(placa);
           temp.setValor(Double.parseDouble(valor));
@@ -133,6 +139,10 @@ public class Controller extends HttpServlet {
           
           
             model.setCurrent(temp);
+            model.setMarcas(marcas);
+            model.setModelos(modelos);
+            model.setCoberturas(coberturas);
+            model.setCategorias(categorias);
         
             session.setAttribute("poliza", temp);
             return "/presentation/cliente/poliza/ViewCoberturas.jsp";
@@ -141,6 +151,61 @@ public class Controller extends HttpServlet {
         }
 }
 
+    public String coberturas(HttpServletRequest request) {
+    Model model = (Model) request.getAttribute("model");
+        Service service = Service.instance();
+        HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        Poliza temp = (Poliza) session.getAttribute("poliza");
+        String[] coberturasSeleccionadas = request.getParameterValues("coberturasFld");
+if (coberturasSeleccionadas != null) {
+    for (String coberturaId : coberturasSeleccionadas) {
+        try{
+            temp.getCoberturas().add(service.coberturaFindbyId(coberturaId));
+        }  catch (Exception ex) {
+            return "";
+        }  
+    }
+        List<Cobertura> coberturas = temp.getCoberturas();
+    int valor = 0;
+        int valormin = 0;
+        for (Cobertura c: coberturas){
+            valor = valor + (c.getPorcentaje()*c.getCostominimo());
+            valormin = valormin + c.getCostominimo();
+        }
+        if (valor>valormin){
+            temp.setCostofinal(valor);
+        }else{
+            temp.setCostofinal(valormin);
+        }
+    return "";
+}
+
+        List<Marca> marcas;
+//        List<Modelo> modelos = new ArrayList<>();
+//        List<Cobertura> coberturas = new ArrayList<>();
+//        List<Categoria> categorias = new ArrayList<>();
+//        try {
+//            marcas = service.marcasFind();
+//            modelos = service.modelosFind();
+//            coberturas = service.coberturasFind();
+//            categorias = service.categoriasFind();
+//            
+//        } catch (Exception ex) {
+//            marcas=null;
+//        }
+//        try {        
+//            model.setMarcas(marcas);
+//            model.setModelos(modelos);
+//            model.setCoberturas(coberturas);
+//            model.setCategorias(categorias);
+//            
+//            return "/presentation/cliente/poliza/View.jsp";
+//        } catch (Exception ex) {
+//            return "";
+//        }   
+return "";
+    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

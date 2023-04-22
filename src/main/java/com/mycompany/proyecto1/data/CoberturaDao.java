@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -65,6 +67,32 @@ public class CoberturaDao {
             if (rs.next()) {
             resultado.setId(Integer.valueOf(rs.getString("id")));
             resultado.setDescripcion(rs.getString("descripcion"));
+            return resultado;
+        } else {
+            return null;
+        }
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public Cobertura readById(String id) {
+       Cobertura resultado = new Cobertura();
+        try {
+            String sql = "select * "
+                    + "from "
+                    + "Cobertura e "
+                    + "where e.id=?";
+            PreparedStatement stm = db.prepareStatement(sql);
+            stm.setString(1,id);
+            ResultSet rs = db.executeQuery(stm);
+            if (rs.next()) {
+            resultado.setId(Integer.valueOf(rs.getString("id")));
+            resultado.setDescripcion(rs.getString("descripcion"));
+            resultado.setCategoriaId(Integer.parseInt(rs.getString("categoria")));
+            resultado.setCostominimo(Integer.parseInt(rs.getString("costominimo")));
+            resultado.setPorcentaje(Integer.parseInt(rs.getString("porcentaje")));
+                
             return resultado;
         } else {
             return null;
