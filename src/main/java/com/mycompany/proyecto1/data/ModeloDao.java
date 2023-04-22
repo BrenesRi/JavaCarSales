@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -43,6 +44,8 @@ public class ModeloDao {
             Modelo e = new Modelo();
             e.setId(rs.getInt(alias + ".id"));
             e.setDescripcion(rs.getString(alias + ".descripcion"));
+            e.setMarcaId(rs.getInt(alias+".marca"));
+            
             return e;
         } catch (SQLException ex) {
             return null;
