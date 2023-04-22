@@ -153,7 +153,7 @@ public class Controller extends HttpServlet {
             //model.setCuentas(service.cuentasFind(cliente));
             model.setCuentas(polizas);
             //session.setAttribute("usuario", real);
-            return "/presentation/cliente/polizas/View.jsp";
+            return "/presentation/admin/datos/ViewPolizas.jsp";
         } catch (Exception ex) {
             return "";
         }

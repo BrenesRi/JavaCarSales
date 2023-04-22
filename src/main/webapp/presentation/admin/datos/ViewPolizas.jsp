@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="com.mycompany.proyecto1.logic.Cliente"%>
+<%@page import="com.mycompany.proyecto1.logic.Poliza"%>
 <%@page import="com.mycompany.proyecto1.presentation.admin.datos.Model"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -48,7 +49,8 @@
                     </td>
                     <td><img src="presentation/admin/modelo/getImage?id=<%=c.getModeloOb().getId()%>" width="140" height ="80"></td>
                     <td><%=c.getCostofinal()%> </td>
-                    <td><a href="presentation/cliente/polizas/detail?numeroFld=<%=c.getNumero()%>"><img src="images/lupa.png" width="50" height ="50"></td>
+                   <td><a href="presentation/cliente/polizas/detail?numeroFld=<%=c.getNumero()%>"><img src="images/lupa.png" width="50" height ="50"></td>
+                    
                     
                 
                 </tr> 
