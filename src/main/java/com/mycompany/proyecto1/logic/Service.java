@@ -61,6 +61,10 @@ public class Service {
     public Cliente clienteFind(Usuario usuario) throws Exception {
         return clienteDao.read(usuario.getCedula());
     }
+    
+    public Cliente clienteFindbyCedula(String Id) throws Exception {
+        return clienteDao.read(Id);
+    }
 
     public Marca marcaFind(String nombre) throws Exception {
         return marcaDao.read(nombre);

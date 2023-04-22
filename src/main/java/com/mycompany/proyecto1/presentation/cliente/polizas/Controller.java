@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Set;
 
 
-@WebServlet(name = "ClientePolizasController", urlPatterns = {"/presentation/cliente/polizas/show"})
+@WebServlet(name = "ClientePolizasController", urlPatterns = {"/presentation/cliente/polizas/show","/presentation/cliente/polizas/detail"})
 public class Controller extends HttpServlet {
     
   protected void processRequest(HttpServletRequest request, 
@@ -38,6 +38,9 @@ public class Controller extends HttpServlet {
           case "/presentation/cliente/polizas/show":
               viewUrl = this.show(request);
               break;
+          case "/presentation/cliente/polizas/detail":
+              viewUrl = this.show(request);
+              break;   
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
   }
@@ -89,6 +92,7 @@ public class Controller extends HttpServlet {
                     
             //model.setCuentas(service.cuentasFind(cliente));
             model.setCuentas(polizas);
+            //session.setAttribute("usuario", real);
             return "/presentation/cliente/polizas/View.jsp";
         } catch (Exception ex) {
             return "";

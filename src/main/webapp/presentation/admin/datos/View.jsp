@@ -28,12 +28,15 @@
     
         <table>
             <thead>
-                <tr> <td>Numero</td> <td>Nombre</td> </tr>
+                <tr> <td>Numero</td> <td>Nombre</td> <td>Ver polizas</td> </tr>
             </thead>
             <tbody>
                 <% for(Cliente c:clientes){%>
-                <tr> <td><a href="presentation/cliente/poliza/show?numeroFld=<%=c.getCedula()%>"><%=c.getCedula()%> </td>  
-                        <td><%=c.getNombre()%></td></tr>             
+                <tr> <td><%=c.getCedula()%> </td>  
+                        <td><%=c.getNombre()%></td>
+                        <td><a href="presentation/admin/datos/detail?idFld=<%=c.getCedula()%>"><img src="images/lupa.png" width="50" height ="50"></td>
+                    
+                </tr>             
                         <%}%>
             </tbody>
         </table>

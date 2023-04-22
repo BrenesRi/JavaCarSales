@@ -1,24 +1,30 @@
+<%-- 
+    Document   : ViewPolizas
+    Created on : 21 abr. 2023, 20:13:33
+    Author     : ribre
+--%>
 
-<%@page import="com.mycompany.proyecto1.logic.Poliza"%>
-<%@page import="com.mycompany.proyecto1.presentation.cliente.polizas.Model"%>
+<%@page import="com.mycompany.proyecto1.logic.Cliente"%>
+<%@page import="com.mycompany.proyecto1.presentation.admin.datos.Model"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
 <%
     Model model = (Model) request.getAttribute("model");
+    List<Cliente> clientes = model.getClientes();
     List<Poliza> polizas = model.getCuentas();
 %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
  <%@ include file="/presentation/Head.jsp" %>
- <title>Poliza</title> 
+ <title>Polizas del cliente seleccionado</title> 
 </head>
-<body >
-    <%@ include file="/presentation/Header.jsp" %>
-
-    <div style="width:50%;margin:auto;">
+    <body>
+        <%@ include file="/presentation/Header.jsp" %>
+        <div style="width:50%;margin:auto;">
         <h1>Listado de Polizas del Cliente</h1>     
     
         <table>
@@ -53,7 +59,7 @@
                         <%}%>
             </tbody>
         </table> 
-    </div> 
-     <%@ include file="/presentation/Footer.jsp" %>
-</body>
+    </div>
+         <%@ include file="/presentation/Footer.jsp" %>
+    </body>
 </html>
