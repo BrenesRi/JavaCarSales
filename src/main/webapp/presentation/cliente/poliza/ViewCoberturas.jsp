@@ -48,7 +48,7 @@
                 <% } %>
                 <% } %>
                 <br> <br>
-                <button style="margin-bottom: 15px">Siguiente (Coberturas) -></button>
+                <button style="margin-bottom: 15px">Siguiente (Confirmar poliza) -></button>
             </form>
         </div>
         <%@ include file="/presentation/Footer.jsp" %>

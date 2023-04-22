@@ -162,6 +162,7 @@ if (coberturasSeleccionadas != null) {
     for (String coberturaId : coberturasSeleccionadas) {
         try{
             temp.getCoberturas().add(service.coberturaFindbyId(coberturaId));
+            temp.getModeloOb().setMarca(service.marcaFind(""+temp.getModeloOb().getMarcaId()));
         }  catch (Exception ex) {
             return "";
         }  
@@ -178,32 +179,11 @@ if (coberturasSeleccionadas != null) {
         }else{
             temp.setCostofinal(valormin);
         }
-    return "";
+        session.setAttribute("poliza", temp);
+        model.setCurrent(temp);                
+    
+    return "/presentation/cliente/poliza/ViewConfirmacion.jsp";
 }
-
-        List<Marca> marcas;
-//        List<Modelo> modelos = new ArrayList<>();
-//        List<Cobertura> coberturas = new ArrayList<>();
-//        List<Categoria> categorias = new ArrayList<>();
-//        try {
-//            marcas = service.marcasFind();
-//            modelos = service.modelosFind();
-//            coberturas = service.coberturasFind();
-//            categorias = service.categoriasFind();
-//            
-//        } catch (Exception ex) {
-//            marcas=null;
-//        }
-//        try {        
-//            model.setMarcas(marcas);
-//            model.setModelos(modelos);
-//            model.setCoberturas(coberturas);
-//            model.setCategorias(categorias);
-//            
-//            return "/presentation/cliente/poliza/View.jsp";
-//        } catch (Exception ex) {
-//            return "";
-//        }   
 return "";
     }
     
