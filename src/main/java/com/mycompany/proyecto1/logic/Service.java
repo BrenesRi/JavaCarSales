@@ -9,6 +9,7 @@ import com.mycompany.proyecto1.data.ClienteDao;
 import com.mycompany.proyecto1.data.CoberturaDao;
 import com.mycompany.proyecto1.data.MarcaDao;
 import com.mycompany.proyecto1.data.ModeloDao;
+import com.mycompany.proyecto1.data.PcDao;
 import com.mycompany.proyecto1.data.PolizaDao;
 import com.mycompany.proyecto1.data.RelDatabase;
 import com.mycompany.proyecto1.data.UsuarioDao;
@@ -28,6 +29,7 @@ public class Service {
     ModeloDao modeloDao;
     CategoriaDao categoriaDao;
     CoberturaDao coberturaDao;
+    PcDao pcdao;
 
     private static Service uniqueInstance;
 
@@ -47,6 +49,7 @@ public class Service {
         modeloDao = new ModeloDao(relDatabase);
         categoriaDao = new CategoriaDao(relDatabase);
         coberturaDao = new CoberturaDao(relDatabase);
+        pcdao = new PcDao(relDatabase);
     }
 
     public Usuario usuarioFind(String cedula, String clave) throws Exception {
@@ -94,6 +97,10 @@ public class Service {
         return polizas;
     }
 
+    public List<Cobertura> coberturasFindByPoliza(String poliza) throws Exception {
+         return pcdao.read(poliza);    
+    }
+    
     public void clienteUpdate(Cliente cliente) throws Exception {
         clienteDao.update(cliente);
     }

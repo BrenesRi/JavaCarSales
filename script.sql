@@ -61,11 +61,21 @@ create table Cobertura (
   Primary Key(id)
 );
 
+create table PC(
+  id integer auto_increment not null,
+  poliza integer not null,
+  cobertura integer not null,
+  Primary Key(id)
+);
+
+
 alter table Cliente add foreign key (usuario) references Usuario(cedula);
 alter table Poliza add foreign key (cliente) references Cliente(cedula);
 alter table Poliza add foreign key (modelo) references Modelo(id);
 alter table Modelo add foreign key (marca) references Marca(id);
 alter table Cobertura add foreign key (categoria) references Categoria(id);
+alter table PC add foreign key (poliza) references Poliza(numero);
+alter table PC add foreign key (cobertura) references Cobertura(id);
 
 insert into Usuario (cedula,clave,tipo) 
 	values ("111","111",1);
@@ -120,3 +130,12 @@ insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal)
 
 insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal) 
 	values ("6-151-21",40000,"2008-8-04","222",4,1997,"semestral",85000);
+
+insert into PC(poliza,cobertura)
+    values ("1","2");
+
+insert into PC(poliza,cobertura)
+    values ("1","1");
+
+insert into PC(poliza,cobertura)
+    values ("2","1");

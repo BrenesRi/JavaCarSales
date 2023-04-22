@@ -134,9 +134,12 @@ public class Controller extends HttpServlet {
           for (Marca marca : marcas) {
                    if(Objects.equals(temp.getModeloOb().getMarcaId(), marca.getId()))
                       temp.getModeloOb().setMarca(marca);
-                   }       
+          }
+          
+          temp.setCoberturas(service.coberturasFindByPoliza(""+temp.getNumero()));
 
             model.setSeleccionado(temp);
+            System.out.println("Hola, mundo!");
             return "/presentation/cliente/polizas/ViewDetail.jsp";
         } catch (Exception ex) {
             return "";

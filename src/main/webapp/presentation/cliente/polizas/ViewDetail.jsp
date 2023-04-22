@@ -4,6 +4,7 @@
     Author     : ribre
 --%>
 <%@page import="com.mycompany.proyecto1.logic.Poliza"%>
+<%@page import="com.mycompany.proyecto1.logic.Cobertura"%>
 <%@page import="com.mycompany.proyecto1.presentation.cliente.polizas.Model"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -76,7 +77,16 @@
                 <span><%=c.getCostofinal()%></span>
             </div> <br>
             <div class="fila">
-                <span><img src="presentation/admin/modelo/getImage?id=<%=c.getModeloOb().getId()%>" width="240" height ="180"></span>
+    <label>Coberturas:</label>
+    <ul>
+      <% for (Cobertura cobertura : c.getCoberturas()) { %>
+        <li><%=cobertura.getDescripcion()%></li>
+        <li><%=cobertura.getPorcentaje()%>&#37;</li>
+      <% } %>
+    </ul>
+  </div>
+    <div class="fila">
+                <span><img src="presentation/admin/modelo/getImage?id=<%=c.getModeloOb().getId()%>" width="340" height ="180"></span>
             </div> <br>
         </div>
     </body>
