@@ -23,7 +23,8 @@
     
         <table>
             <thead>
-                <tr> <td>Numero</td> <td>Placa</td> <td>Valor</td> <td>Fecha</td>  </tr>
+                <tr> <td>Numero</td> <td>Placa</td> <td>Valor</td> <td>Fecha</td> <td>Auto</td> <td>Imagen</td>
+                    <td>Costo Final</td> <td>Detalles</td> </tr>
             </thead>
             <tbody>
                 <% for(Poliza c:polizas){%>
@@ -32,8 +33,16 @@
                     <td><%=c.getPlaca()%></td>
                     <td><%=c.getValor()%></td>
                     <td><%=c.getFecha()%></td>
-                    <td><%=c.getModeloOb().getDescripcion()%></td>
-                    
+                    <td>
+                        <%= c.getModeloOb().getMarca().getNombre()%>
+                           <%= " - " %> 
+                          <%=  c.getModeloOb().getDescripcion() %> 
+                          <%=  " - " %> 
+                          <%=  c.getAnio()%>  
+                    </td>
+                    <td><img src="presentation/admin/modelo/getImage?id=<%=c.getModeloOb().getId()%>" width="140" height ="80"></td>
+                    <td><%=c.getCostofinal()%> </td>
+                    <td><img src="images/lupa.png" width="50" height ="50"></td>
                     
                 
                 </tr> 

@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -67,13 +68,17 @@ public class Controller extends HttpServlet {
           for (Poliza poliza : polizas) {
                for (Modelo modelo : modelos) {
                    if(poliza.getModelo()==modelo.getId()){
-                      poliza.setModeloOb(modelo);
-                      //poliza.getModeloOb().setMarca(service.marcaFind(poliza.get));
-                       
+                      poliza.setModeloOb(modelo);   
                    }
                }
                  }
-          
+          for (Poliza poliza : polizas) {
+               for (Marca marca : marcas) {
+                   if(Objects.equals(poliza.getModeloOb().getMarcaId(), marca.getId()))
+                      poliza.getModeloOb().setMarca(marca);
+                   }
+               }
+                      
 //          for (Poliza poliza : polizas) {
 //               for (Marca marca : marcas) {
 //                   if(poliza.getModeloOb().getMarca().getId()==)){
