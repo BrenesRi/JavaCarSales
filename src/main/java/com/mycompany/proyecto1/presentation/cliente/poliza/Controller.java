@@ -196,7 +196,7 @@ if (coberturasSeleccionadas != null) {
     int valor = 0;
         int valormin = 0;
         for (Cobertura c: coberturas){
-            valor = valor + (c.getPorcentaje()*c.getCostominimo());
+            valor = valor + ((c.getCostominimo() * c.getPorcentaje())/ 100);
             valormin = valormin + c.getCostominimo();
         }
         if (valor>valormin){

@@ -120,10 +120,10 @@ Insert Into Categoria (descripcion)
         values ("Perjuicio Directo");
 
 INSERT INTO Cobertura (descripcion, categoria, costominimo, porcentaje)
-VALUES ('Perjuicio a personas', 1, 50000, 20);
+VALUES ('Perjuicio a personas', 1, 5000, 20);
 
 INSERT INTO Cobertura (descripcion, categoria, costominimo, porcentaje)
-VALUES ('Perjuicio al Auto', 2, 30000, 10);
+VALUES ('Perjuicio al Auto', 2, 3000, 10);
 
 insert into Poliza (placa,valor,fecha,cliente,modelo,anio,pago,costofinal) 
 	values ("1-111-11",10000,"2008-7-04","111",1,2018,"trimestral",50000);
