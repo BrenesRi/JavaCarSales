@@ -122,6 +122,10 @@ public class Service {
     public Poliza polizaFind(String numero) throws Exception {
         return polizaDao.read(numero);
     }
+    
+    public Poliza polizaFindbyPlaca(String placa) throws Exception {
+        return polizaDao.readByPlaca(placa);
+    }
 
     public Modelo modeloFindByNombre(String nombre) throws Exception {
         return modeloDao.readByNombre(nombre);
@@ -171,6 +175,14 @@ public class Service {
 
     public void coberturaCreate(Cobertura cobertura) throws Exception {
         coberturaDao.create(cobertura);
+    }
+    
+    public void pcCreate(Cobertura cobertura, Poliza poliza) throws Exception {
+        pcdao.create(cobertura, poliza);
+    }
+    
+    public void polizaCreate(Poliza poliza) throws Exception {
+        polizaDao.create(poliza);
     }
 
 }

@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 
 @WebServlet(name = "ClientePolizaController", urlPatterns = {"/presentation/cliente/poliza/show","/presentation/cliente/poliza/create",
-                                                                            "/presentation/cliente/poliza/coberturas"})
+                                                             "/presentation/cliente/poliza/coberturas","/presentation/cliente/poliza/agregar"})
 public class Controller extends HttpServlet {
     
   protected void processRequest(HttpServletRequest request, 
@@ -54,6 +54,9 @@ public class Controller extends HttpServlet {
               break;
           case "/presentation/cliente/poliza/coberturas":
               viewUrl = this.coberturas(request);
+              break;
+          case "/presentation/cliente/poliza/agregar":
+              viewUrl = this.agregar(request);
               break;
         }          
         request.getRequestDispatcher(viewUrl).forward( request, response); 
@@ -88,6 +91,28 @@ public class Controller extends HttpServlet {
             return "";
         }   
     }
+    
+    //A partir de aqui no tocar
+    
+    public String agregar(HttpServletRequest request) {
+    Model model = (Model) request.getAttribute("model");
+        Service service = Service.instance();
+        HttpSession session = request.getSession(true);
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        Poliza temp = (Poliza) session.getAttribute("poliza");
+        List<Cobertura> coberturas = temp.getCoberturas();
+        try {        
+            service.polizaCreate(temp);
+            Poliza recuperado=service.polizaFindbyPlaca(temp.getPlaca());
+            for(Cobertura c: coberturas){
+                service.pcCreate(c, recuperado);
+            }
+            return "/presentation/cliente/polizas/show";
+        } catch (Exception ex) {
+            return "";
+        }   
+    }     
+    // a partir de aqui no tocar
     
     protected String create(HttpServletRequest request){
     Model model = (Model) request.getAttribute("model");

@@ -7,6 +7,7 @@ package com.mycompany.proyecto1.data;
 import com.mycompany.proyecto1.logic.Categoria;
 import com.mycompany.proyecto1.logic.Cobertura;
 import com.mycompany.proyecto1.logic.Pc;
+import com.mycompany.proyecto1.logic.Poliza;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,6 +52,17 @@ public class PcDao {
     catch (SQLException ex) {
         }
         return coberturas;  
+    }
+    
+     public void create(Cobertura c, Poliza p) throws Exception {
+        String sql = "insert into "
+                + "PC "
+                + "(poliza,cobertura) "
+                + "values(?,?)";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setInt(1, p.getNumero());
+        stm.setInt(2, c.getId());
+        db.executeUpdate(stm);
     }
 }
 

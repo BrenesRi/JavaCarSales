@@ -89,6 +89,13 @@
     <div class="fila">
                 <span><img src="presentation/admin/modelo/getImage?id=<%=c.getModeloOb().getId()%>" width="340" height ="180"></span>
             </div> <br>
+            
+            <form method="post" action="presentation/cliente/poliza/agregar">
+             <button style="margin-bottom: 15px">CONFIRMAR NUEVA POLIZA</button>   
+            </form>
+            <form method="post" action="presentation/cliente/polizas/show">
+             <button style="margin-bottom: 15px">CANCELAR NUEVA POLIZA</button>   
+            </form>
         </div>
     </body>
 </html>

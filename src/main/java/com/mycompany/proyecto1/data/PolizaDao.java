@@ -45,6 +45,25 @@ public class PolizaDao {
         }
     }
     
+    public Poliza readByPlaca(String placa) throws Exception {
+        String sql = "select "
+                + "* "
+                + "from Poliza e inner join Cliente c on e.cliente=c.cedula "
+                + "where e.placa=?";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, placa);
+        ResultSet rs = db.executeQuery(stm);
+        ClienteDao clienteDao = new ClienteDao(db);
+        Poliza c;
+        if (rs.next()) {
+            c = from(rs, "e");
+            c.setCliente(clienteDao.from(rs, "c"));
+            return c;
+        } else {
+            throw new Exception("Poliza no Existe");
+        }
+    }
+    
     public List<Poliza> findByCliente(Cliente cliente) {
         List<Poliza> resultado = new ArrayList<>();
         try {
@@ -96,5 +115,22 @@ public class PolizaDao {
         } catch (SQLException ex) {
             return null;
         }
+    }
+    
+     public void create(Poliza e) throws Exception {
+        String sql = "insert into "
+                + "Poliza "
+                + "(placa,valor,fecha,cliente,modelo,anio,pago,costofinal) "
+                + "values(?,?,?,?,?,?,?,?)";
+        PreparedStatement stm = db.prepareStatement(sql);
+        stm.setString(1, e.getPlaca());
+        stm.setDouble(2, e.getValor());
+        stm.setString(3, e.getFecha());
+        stm.setString(4, e.getCliente().getCedula());
+        stm.setInt(5, e.getModeloOb().getId());
+        stm.setInt(6, e.getAnio());
+        stm.setString(7, e.getPago());
+        stm.setInt(8, e.getCostofinal());
+        db.executeUpdate(stm);
     }
 }
